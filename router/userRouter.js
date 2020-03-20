@@ -36,6 +36,13 @@ router.post('/login', function (req, res) {
   .then(data=>{
     // console.log(data) 数组
     if(data.length > 0) {
+      // 登录成功存session
+      //  req.session.login=true
+      //  req.session.name= username
+
+      // token 形式
+      // let token = JWT.creatToken({login:true, name:username})
+      // res.send({code:200,message:'登录成功',token:token})
        res.send({code:200,message:'登录成功'})
     }else {
       res.send({code:401,message:'用户名或密码错误'})
@@ -45,6 +52,11 @@ router.post('/login', function (req, res) {
   .catch(err=>{
     res.send({code:500,message:'内部错误'})
   })
+})
+// 用户退出登录
+router.post('/logout', function(req,res){
+  req.session.destroy()  // 销毁
+  res.send({code:200, message:'退出登录成功'})
 })
  
 module.exports = router
