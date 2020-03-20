@@ -105,7 +105,7 @@ router.post('/update',(req,res)=>{
 router.post('/getInfobypage',(req,res)=>{
   let pagesize = req.body.pagesize || 10
   let pagenum = req.body.pagesize || 1
-  Food.find().limit()
+  Food.find().limit(Number(pagesize)).skip(Number((pagenum -1)*pagesize))
 })
 module.exports = router
 
